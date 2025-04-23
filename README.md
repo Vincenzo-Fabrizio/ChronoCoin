@@ -1,23 +1,39 @@
-<<<<<<< HEAD
-# Coin
-CHRONOCOIN è un'app per collezionisti di monete, utile per gestire la propria raccolta e monitorare le quotazioni aggiornate dell’oro. Permette di aggiungere, visualizzare e rimuovere monete con un'interfaccia semplice e intuitiva. Il tuo tesoro numismatico, sempre a portata di clic.
-=======
-## Getting Started
+# 🪙 CHRONOCOIN
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+**CHRONOCOIN** è un'applicazione pensata per i collezionisti di monete, che consente di:
+- 🧩 Gestire facilmente la propria raccolta numismatica
+- 💰 Monitorare in tempo reale le quotazioni aggiornate dell’oro
+- ➕ Aggiungere, 👁️ visualizzare e ❌ rimuovere monete con un'interfaccia semplice e intuitiva
 
-## Folder Structure
+📦 **Il tuo tesoro numismatico, sempre a portata di clic.**
 
-The workspace contains two folders by default, where:
+---
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## 🚀 Getting Started
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+Benvenuto nel mondo Java su Visual Studio Code! Ecco una guida per iniziare a sviluppare con CHRONOCOIN:
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+### 📁 Struttura del progetto
 
-## Dependency Management
+Il workspace contiene due cartelle principali:
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
->>>>>>> bb2ee6e (Initial commit)
+- `src` – contiene i file sorgente del progetto Java
+- `lib` – contiene le dipendenze esterne del progetto
+
+🛠️ I file compilati verranno generati automaticamente nella cartella `bin`.
+
+> 🔧 Per personalizzare la struttura delle cartelle, modifica il file `.vscode/settings.json`.
+
+---
+
+## 📦 Gestione delle Dipendenze
+
+Il pannello `JAVA PROJECTS` di VS Code ti permette di gestire facilmente le dipendenze.
+
+🔗 Maggiori dettagli disponibili qui: [Gestione delle dipendenze Java su VS Code](https://github.com/microsoft/vscode-java-dependency#manage-dependencies)
+
+---
+
+## 🧭 Note Finali
+
+CHRONOCOIN è in continua evoluzione. Segui il progetto per aggiornamenti futuri, nuove funzionalità e miglioramenti dell’interfaccia!
