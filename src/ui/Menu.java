@@ -22,85 +22,186 @@ public class Menu {
 
         switch (choice) {
             case 1 -> {
-                JPanel mainPanel = new JPanel();
-                mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+                JPanel mainPanel = new JPanel(new GridBagLayout());
                 mainPanel.setBackground(new Color(173, 216, 230));
                 mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
             
-                JTextField nameField = new JTextField();
-                JTextField yearField = new JTextField();
-                JTextField materialField = new JTextField();
-                JTextField weightField = new JTextField();
-                JTextField diameterField = new JTextField();
-                JTextField heightField = new JTextField();
-                JTextField priceField = new JTextField();
+                Dimension labelDim = new Dimension(150, 35);
+                Dimension fieldDim = new Dimension(430, 40);
             
+                JTextField nameField     = new JTextField();
+                JTextField yearField     = new JTextField();
+                JTextField materialField = new JTextField();
+                JTextField weightField   = new JTextField();
+                JTextField diameterField = new JTextField();
+                JTextField heightField   = new JTextField();
+                JTextField priceField    = new JTextField();
                 JComboBox<OptionConservation> obverseBox = new JComboBox<>(OptionConservation.values());
                 JComboBox<OptionConservation> reverseBox = new JComboBox<>(OptionConservation.values());
-                JComboBox<NumismaticRarity> degreeBox = new JComboBox<>(NumismaticRarity.values());
+                JComboBox<NumismaticRarity> degreeBox    = new JComboBox<>(NumismaticRarity.values());
             
-                JTextArea noteArea = new JTextArea(3, 25);
+                for (JTextField tf : new JTextField[]{
+                        nameField, yearField, materialField,
+                        weightField, diameterField, heightField, priceField
+                }) {
+                    tf.setPreferredSize(fieldDim);
+                    tf.setMaximumSize(fieldDim);
+                    tf.setMinimumSize(fieldDim);
+                    tf.setHorizontalAlignment(JTextField.LEFT);
+                }
+            
+                JTextArea noteArea = new JTextArea(3, 1);
+                noteArea.setLineWrap(true);
+                noteArea.setWrapStyleWord(true);
                 JScrollPane noteScroll = new JScrollPane(noteArea);
+                noteScroll.setPreferredSize(new Dimension(fieldDim.width, fieldDim.height * 3));
+                noteScroll.setMaximumSize(noteScroll.getPreferredSize());
             
                 JButton obverseFileBtn = new JButton("📷 𝙵𝙾𝚃𝙾 𝙵𝚁𝙾𝙽𝚃𝙴");
                 JButton reverseFileBtn = new JButton("📷 𝙵𝙾𝚃𝙾 𝚁𝙴𝚃𝚁𝙾");
                 JLabel obversePath = new JLabel(" ");
                 JLabel reversePath = new JLabel(" ");
-            
                 obverseFileBtn.addActionListener(e -> {
                     JFileChooser chooser = new JFileChooser();
                     if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
                         obversePath.setText(chooser.getSelectedFile().getAbsolutePath());
                 });
-            
                 reverseFileBtn.addActionListener(e -> {
                     JFileChooser chooser = new JFileChooser();
                     if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
                         reversePath.setText(chooser.getSelectedFile().getAbsolutePath());
                 });
             
-                Component[][] campi = {
-                    {new JLabel("𝙽𝚘𝚖𝚎:"), nameField},
-                    {new JLabel("𝙰𝚗𝚗𝚘:"), yearField},
-                    {new JLabel("𝙼𝚊𝚝𝚎𝚛𝚒𝚊𝚕𝚎:"), materialField},
-                    {new JLabel("𝙿𝚎𝚜𝚘 (𝚐):"), weightField},
-                    {new JLabel("𝙳𝚒𝚊𝚖𝚎𝚝𝚛𝚘 (𝚖𝚖):"), diameterField},
-                    {new JLabel("𝙰𝚕𝚝𝚎𝚣𝚣𝚊 (𝚖𝚖):"), heightField},
-                    {new JLabel("𝙿𝚛𝚎𝚣𝚣𝚘 (€):"), priceField},
-                    {new JLabel("𝙲𝚘𝚗𝚜𝚎𝚛𝚟𝚊𝚣𝚒𝚘𝚗𝚎 𝚏𝚛𝚘𝚗𝚝𝚎:"), obverseBox},
-                    {new JLabel("𝙲𝚘𝚗𝚜𝚎𝚛𝚟𝚊𝚣𝚒𝚘𝚗𝚎 𝚛𝚎𝚝𝚛𝚘:"), reverseBox},
-                    {new JLabel("𝙶𝚛𝚊𝚍𝚘 𝚗𝚞𝚖𝚒𝚜𝚖𝚊𝚝𝚒𝚌𝚘:"), degreeBox},
-                    {new JLabel("𝙽𝚘𝚝𝚎:"), noteScroll},
-                    {obverseFileBtn, obversePath},
-                    {reverseFileBtn, reversePath}
-                };
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.insets = new Insets(5, 5, 5, 5);
+                gbc.anchor = GridBagConstraints.WEST;
+                gbc.fill   = GridBagConstraints.NONE;
             
-                for (Component[] riga : campi) {
-                    JPanel row = new JPanel(new BorderLayout(15, 5));
-                    row.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
-                    row.setBackground(new Color(173, 216, 230));
-                    row.add(riga[0], BorderLayout.WEST);
-                    row.add(riga[1], BorderLayout.CENTER);
-                    mainPanel.add(row);
-                    mainPanel.add(Box.createVerticalStrut(10));
-                }
+                int row = 0;
             
-                // Finestra contenitore
-                JDialog dialog = new JDialog((Frame) null, "ɪɴꜱᴇʀɪꜱᴄɪ ᴜɴᴀ ɴᴜᴏᴠᴀ ᴍᴏɴᴇᴛᴀ", true);
-                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                dialog.getContentPane().add(mainPanel);
-                dialog.setSize(800, 700); // DIMENSIONE COERENTE con il case 2
-                dialog.setLocationRelativeTo(null);
+                JLabel nameLabel = new JLabel("𝙽𝚘𝚖𝚎:");
+                nameLabel.setPreferredSize(labelDim);
+                gbc.gridx = 0; gbc.gridy = row;
+                mainPanel.add(nameLabel, gbc);
+                gbc.gridx = 1;
+                mainPanel.add(nameField, gbc);
+                row++;
             
-                // Pannello pulsanti OK / Annulla
+                JLabel yearLabel = new JLabel("𝙰𝚗𝚗𝚘:");
+                yearLabel.setPreferredSize(labelDim);
+                gbc.gridx = 0; gbc.gridy = row;
+                mainPanel.add(yearLabel, gbc);
+                gbc.gridx = 1;
+                mainPanel.add(yearField, gbc);
+                row++;
+            
+                JLabel materialLabel = new JLabel("𝙼𝚊𝚝𝚎𝚛𝚒𝚊𝚕𝚎:");
+                materialLabel.setPreferredSize(labelDim);
+                gbc.gridx = 0; gbc.gridy = row;
+                mainPanel.add(materialLabel, gbc);
+                gbc.gridx = 1;
+                mainPanel.add(materialField, gbc);
+                row++;
+            
+                JLabel weightLabel = new JLabel("𝙿𝚎𝚜𝚘 (𝚐):");
+                weightLabel.setPreferredSize(labelDim);
+                gbc.gridx = 0; gbc.gridy = row;
+                mainPanel.add(weightLabel, gbc);
+                gbc.gridx = 1;
+                mainPanel.add(weightField, gbc);
+                row++;
+            
+                JLabel diameterLabel = new JLabel("𝙳𝚒𝚊𝚖𝚎𝚝𝚛𝚘 (𝚖𝚖):");
+                diameterLabel.setPreferredSize(labelDim);
+                gbc.gridx = 0; gbc.gridy = row;
+                mainPanel.add(diameterLabel, gbc);
+                gbc.gridx = 1;
+                mainPanel.add(diameterField, gbc);
+                row++;
+            
+                JLabel heightLabel = new JLabel("𝙰𝚕𝚝𝚎𝚣𝚣𝚊 (𝚖𝚖):");
+                heightLabel.setPreferredSize(labelDim);
+                gbc.gridx = 0; gbc.gridy = row;
+                mainPanel.add(heightLabel, gbc);
+                gbc.gridx = 1;
+                mainPanel.add(heightField, gbc);
+                row++;
+            
+                // Prezzo
+                JLabel priceLabel = new JLabel("𝙿𝚛𝚎𝚣𝚣𝚘 (€):");
+                priceLabel.setPreferredSize(labelDim);
+                gbc.gridx = 0; gbc.gridy = row;
+                mainPanel.add(priceLabel, gbc);
+                gbc.gridx = 1;
+                mainPanel.add(priceField, gbc);
+                row++;
+            
+                JLabel obvLabel = new JLabel("𝙲𝚘𝚗𝚜𝚎𝚛𝚟𝚊𝚣𝚒𝚘𝚗𝚎 𝚏𝚛𝚘𝚗𝚝𝚎:");
+                obvLabel.setPreferredSize(labelDim);
+                gbc.gridx = 0; gbc.gridy = row;
+                mainPanel.add(obvLabel, gbc);
+                gbc.gridx = 1;
+                obverseBox.setPreferredSize(fieldDim);
+                mainPanel.add(obverseBox, gbc);
+                row++;
+            
+                JLabel revLabel = new JLabel("𝙲𝚘𝚗𝚜𝚎𝚛𝚟𝚊𝚣𝚒𝚘𝚗𝚎 𝚛𝚎𝚝𝚛𝚘:");
+                revLabel.setPreferredSize(labelDim);
+                gbc.gridx = 0; gbc.gridy = row;
+                mainPanel.add(revLabel, gbc);
+                gbc.gridx = 1;
+                reverseBox.setPreferredSize(fieldDim);
+                mainPanel.add(reverseBox, gbc);
+                row++;
+        
+                JLabel degLabel = new JLabel("𝙶𝚛𝚊𝚍𝚘 𝚗𝚞𝚖𝚒𝚜𝚖𝚊𝚝𝚒𝚌𝚘:");
+                degLabel.setPreferredSize(labelDim);
+                gbc.gridx = 0; gbc.gridy = row;
+                mainPanel.add(degLabel, gbc);
+                gbc.gridx = 1;
+                degreeBox.setPreferredSize(fieldDim);
+                mainPanel.add(degreeBox, gbc);
+                row++;
+            
+                JLabel noteLabel = new JLabel("𝙽𝚘𝚝𝚎:");
+                noteLabel.setPreferredSize(labelDim);
+                gbc.gridx = 0; gbc.gridy = row;
+                mainPanel.add(noteLabel, gbc);
+                gbc.gridx = 1;
+                mainPanel.add(noteScroll, gbc);
+                row++;
+            
+                gbc.gridx = 0; gbc.gridy = row;
+                mainPanel.add(obverseFileBtn, gbc);
+                gbc.gridx = 1;
+                mainPanel.add(obversePath, gbc);
+                row++;
+        
+                gbc.gridx = 0; gbc.gridy = row;
+                mainPanel.add(reverseFileBtn, gbc);
+                gbc.gridx = 1;
+                mainPanel.add(reversePath, gbc);
+                row++;
+            
+                gbc.gridx = 0; gbc.gridy = row;
+                gbc.gridwidth = 2;
+                gbc.anchor = GridBagConstraints.CENTER;
+                gbc.insets = new Insets(20, 5, 5, 5);
                 JPanel buttonPanel = new JPanel();
                 buttonPanel.setBackground(new Color(173, 216, 230));
-                JButton ok = new JButton("✅ 𝙸𝙽𝚂𝙴𝚁𝙸𝚂𝙲𝙸");
+                JButton ok     = new JButton("✅ 𝙸𝙽𝚂𝙴𝚁𝙸𝚂𝙲𝙸");
                 JButton cancel = new JButton("❌ 𝙰𝙽𝙽𝚄𝙻𝙻𝙰");
                 buttonPanel.add(ok);
                 buttonPanel.add(cancel);
-                mainPanel.add(buttonPanel);
-            
+                mainPanel.add(buttonPanel, gbc);
+        
+                JDialog dialog = new JDialog((Frame) null, "ɪɴꜱᴇʀɪꜱᴄɪ ᴜɴᴀ ɴᴜᴏᴠᴀ ᴍᴏɴᴇᴛᴀ", true);
+                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                dialog.getContentPane().add(mainPanel);
+                dialog.pack();
+                dialog.setResizable(false);
+                dialog.setLocationRelativeTo(null);
+        
                 ok.addActionListener(e -> {
                     try {
                         Coin coin = new Coin();
@@ -119,13 +220,15 @@ public class Menu {
                         coin.setPhotoPathReverse(reversePath.getText());
             
                         Coin inserted = client.createCoin(coin);
-                        JOptionPane.showMessageDialog(dialog, "✅ 𝙼𝙾𝙽𝙴𝚃𝙰 𝙸𝙽𝚂𝙴𝚁𝙸𝚃𝙰: " + inserted.getName());
+                        JOptionPane.showMessageDialog(dialog,
+                            "✅ 𝙼𝙾𝙽𝙴𝚃𝙰 𝙸𝙽𝚂𝙴𝚁𝙸𝚃𝙰: " + inserted.getName());
                         dialog.dispose();
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(dialog, "❌ 𝙴𝚁𝚁𝙾𝚁𝙴: " + ex.getMessage(), "ᴇʀʀᴏʀᴇ", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(dialog,
+                            "❌ 𝙴𝚁𝚁𝙾𝚁𝙴: " + ex.getMessage(),
+                            "ᴇʀʀᴏʀᴇ", JOptionPane.ERROR_MESSAGE);
                     }
                 });
-            
                 cancel.addActionListener(e -> dialog.dispose());
             
                 dialog.setVisible(true);
