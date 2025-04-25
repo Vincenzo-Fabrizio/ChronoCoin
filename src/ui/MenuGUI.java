@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import service.GoldPriceClient;
 
+@SuppressWarnings({"unusedLambdaParameter", "unused"})
 public class MenuGUI extends JFrame {
 
     private JLabel goldPriceLabel;

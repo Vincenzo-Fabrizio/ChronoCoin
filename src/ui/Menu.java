@@ -15,6 +15,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
+@SuppressWarnings({"unusedLambdaParameter", "unused"})
 public class Menu {
 
     public static void executeOption(int choice) {
