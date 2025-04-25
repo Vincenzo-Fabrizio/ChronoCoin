@@ -36,7 +36,7 @@ public class MenuGUI extends JFrame {
         add(headerPanel, BorderLayout.NORTH);
 
         // --- IMMAGINE HEADER DECORATIVA ---
-        JLabel imageLabel = new JLabel(new ImageIcon("src/assets/Icon4.png"));
+        JLabel imageLabel = new JLabel(new ImageIcon(MenuGUI.class.getClassLoader().getResource("assets/Icon4.png")));
         imageLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(210, 180, 140)));
         add(imageLabel, BorderLayout.CENTER);
 
