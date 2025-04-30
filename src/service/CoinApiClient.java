@@ -153,20 +153,25 @@ public class CoinApiClient {
 
     private String coinToJson(Coin coin) {
         return "{"
-                + "\"name\":\"" + coin.getName() + "\","
+                + "\"name\":\"" + escape(coin.getName()) + "\","
                 + "\"year\":" + coin.getYear() + ","
-                + "\"material\":\"" + coin.getMaterial() + "\","
+                + "\"material\":\"" + escape(coin.getMaterial()) + "\","
                 + "\"weight\":" + coin.getWeight() + ","
                 + "\"diameter\":" + coin.getDiameter() + ","
                 + "\"height\":" + coin.getHeight() + ","
                 + "\"price\":" + coin.getPrice() + ","
-                + "\"conservationObverse\":\"" + coin.getConservationObverse() + "\","
-                + "\"conservationReverse\":\"" + coin.getConservationReverse() + "\","
-                + "\"degree\":\"" + coin.getDegree() + "\","
-                + "\"note\":\"" + coin.getNote() + "\","
-                + "\"photoPathObverse\":\"" + coin.getPhotoPathObverse() + "\","
-                + "\"photoPathReverse\":\"" + coin.getPhotoPathReverse() + "\""
+                + "\"conservationObverse\":\"" + coin.getConservationObverse().name() + "\","
+                + "\"conservationReverse\":\"" + coin.getConservationReverse().name() + "\","
+                + "\"degree\":\"" + coin.getDegree().name() + "\","
+                + "\"note\":\"" + escape(coin.getNote()) + "\","
+                + "\"photoPathObverse\":\"" + escape(coin.getPhotoPathObverse()) + "\","
+                + "\"photoPathReverse\":\"" + escape(coin.getPhotoPathReverse()) + "\""
                 + "}";
+    }
+    
+    private String escape(String text) {
+        if (text == null) return "";
+        return text.replace("\\", "\\\\").replace("\"", "\\\"");
     }
     
 };
