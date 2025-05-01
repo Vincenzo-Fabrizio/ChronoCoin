@@ -61,7 +61,9 @@ public class Menu {
                 JButton obverseFileBtn = new JButton("📷 𝙵𝙾𝚃𝙾 𝙵𝚁𝙾𝙽𝚃𝙴");
                 JButton reverseFileBtn = new JButton("📷 𝙵𝙾𝚃𝙾 𝚁𝙴𝚃𝚁𝙾");
                 JLabel obversePath = new JLabel(" ");
+                obversePath.setFont(new Font("SansSerif", Font.PLAIN, 10));
                 JLabel reversePath = new JLabel(" ");
+                reversePath.setFont(new Font("SansSerif", Font.PLAIN, 10));
                 obverseFileBtn.addActionListener(e -> {
                     JFileChooser chooser = new JFileChooser();
                     if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
